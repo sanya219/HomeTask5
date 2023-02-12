@@ -8,10 +8,28 @@ int[] CreateArray(int size, int minValue, int maxValue)
     return array;
 }
 
+double[] CreateArrayDouble(int size, int minValue, int maxValue)
+{
+    double[] array = new double[size];
+    for(int i = 0; i < size; i++)
+    {
+        array[i] = new Random().Next(minValue, maxValue + 1);
+        array[i] += new Random().NextDouble();
+    }
+    return array;
+}
+
 void PrintArray(int[] array)
 {
     for(int i = 0; i < array.Length; i++)
         Console.Write(array[i] + " ");
+    Console.Write("\n");
+}
+
+void PrintArrayDouble(double[] array)
+{
+    for(int i = 0; i < array.Length; i++)
+        Console.Write(Math.Round(array[i], 2) + " ");
     Console.Write("\n");
 }
 /* 
@@ -58,3 +76,44 @@ int[] myArray36 = CreateArray(arraySize36, arrayMin36, arrayMax36);
 PrintArray(myArray36);
 int sum36 = SumOfElementsOnOddPositions(myArray36);
 Console.WriteLine("Number of elements on odd positions in array: " + sum36);
+
+/*
+Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.
+[3 7 22 2 78] -> 76
+*/
+double findMax(double[] array)
+{
+    double result = array[0];
+    for(int i = 0; i < array.Length; i++)
+        if(array[i] > result)
+            result = array[i];
+    return result;
+}
+
+double findMin(double[] array)
+{
+    double result = array[0];
+    for(int i = 0; i < array.Length; i++)
+        if(array[i] < result)
+            result = array[i];
+    return result;
+}
+
+double getMinMaxDiff(double min, double max)
+{
+    return max - min;
+}
+
+
+Console.Write("Enter the array size: ");
+int arraySize38 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter the minimum possible value: ");
+int arrayMin38 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Enter the maximum possible value: ");
+int arrayMax38 = Convert.ToInt32(Console.ReadLine());
+double[] myArray38 = CreateArrayDouble(arraySize38, arrayMin38, arrayMax38);
+PrintArrayDouble(myArray38);
+double min38 = findMin(myArray38);
+double max38 = findMax(myArray38);
+double minMaxDif38 = getMinMaxDiff(min38, max38);
+Console.WriteLine($"The difference of minimal [{Math.Round(min38, 2)}] and maximal [{Math.Round(max38, 2)}] is: {Math.Round(minMaxDif38, 2)}");
